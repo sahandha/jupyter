@@ -53,4 +53,5 @@ RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
 RUN mkdir /external/spark-jupyter
 
-CMD cd /external/spark-jupyter && PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" /opt/spark/bin/pyspark
+#CMD cd /external/spark-jupyter && PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" /opt/spark/bin/pyspark
+CMD cd /external/spark-jupyter && PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" 
