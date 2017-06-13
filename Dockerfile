@@ -21,7 +21,7 @@ RUN pip install jupyter
 ENV PATH=/home/ubuntu/.local/bin:$PATH
 
 
-RUN jupyter notebook --generate-config -y
+#RUN jupyter notebook --generate-config -y
 RUN sed -i -e 's/#c.NotebookApp.ip\ =\ \x27localhost\x27/c.NotebookApp.ip\ =\ \x27*\x27/g' ~/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e 's/#c.NotebookApp.open_browser\ =\ True/c.NotebookApp.open_browser\ =\ False/g' ~/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e 's/#c.NotebookApp.port/c.NotebookApp.port/g' ~/.jupyter/jupyter_notebook_config.py
