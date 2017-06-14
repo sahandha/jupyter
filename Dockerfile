@@ -31,13 +31,13 @@ sudo debconf-set-selections
 
 RUN sudo apt-add-repository ppa:webupd8team/java
 RUN sudo apt-get update 
-RUN sudo apt-get -qq -y install oracle-java7-installer
+RUN sudo apt-get -qq -y install oracle-java8-installer
 
 RUN wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz 
 RUN tar xvf spark-2.0.2-bin-hadoop2.7.tgz
 RUN rm spark-2.0.2-bin-hadoop2.7.tgz
 RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
-RUN mkdir /external/spark-jupyter
+RUN mkdir -p /external/spark-jupyter --allow-root
 
-CMD cd /external/spark-jupyter && PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" /opt/spark/bin/pyspark
+CMD cd /external/spark-jupyter && PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" /opt/spark/bin/pyspark 
