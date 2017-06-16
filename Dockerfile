@@ -18,7 +18,7 @@ RUN jupyter notebook --generate-config --allow-root \
 
 EXPOSE 8888
 
-#RUN pip install numpy scipy matplotlib seaborn
+RUN conda install numpy scipy matplotlib seaborn
 
 
 #Install java
