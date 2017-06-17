@@ -1,11 +1,7 @@
-FROM jupyter/base-notebook
-
+FROM continuumio/miniconda3
 
 MAINTAINER Sahand Hariri sahandha@gmail.com
 
-USER root
-
-# Install all OS dependencies for fully functional notebook server
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     wget \
     vim \
@@ -16,20 +12,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 
-#Install java
-RUN echo debconf shared/accepted-oracle-license-v1-1 select true | \
-debconf-set-selections
-RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | \
-debconf-set-selections
-
-RUN apt-get update
-RUN apt-get install -yq default-jdk
-
-RUN wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz 
-RUN tar xvf spark-2.0.2-bin-hadoop2.7.tgz
-RUN rm spark-2.0.2-bin-hadoop2.7.tgz
-RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
-
+RUN /opt/conda/bin/conda install jupyter -y --quiet \
+&& mkdir /opt/notebooks
 
 RUN jupyter notebook --generate-config --allow-root \
 && sed -i -e 's/#c.NotebookApp.ip\ =\ \x27localhost\x27/c.NotebookApp.ip\ =\ \x27*\x27/g' ~/.jupyter/jupyter_notebook_config.py \
@@ -38,6 +22,19 @@ RUN jupyter notebook --generate-config --allow-root \
 && sed -i -e 's/#c.NotebookApp.allow_root\ =\ False/c.NotebookApp.allow_root\ =\ True/g' ~/.jupyter/jupyter_notebook_config.py
 
 EXPOSE 8888
+EXPOSE 8889
+
+#Install java
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+
+RUN apt-get update
+RUN apt-get install -yq default-jdk
+
+RUN wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz 
+RUN tar xvf spark-2.0.2-bin-hadoop2.7.tgz
+RUN rm spark-2.0.2-bin-hadoop2.7.tgz
+RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
 WORKDIR /external/spark-jupyter
 
