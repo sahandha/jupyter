@@ -3,15 +3,15 @@ MAINTAINER Sahand Hariri sahandha@gmail.com
 
 RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
 RUN apt-get -qq update
-RUN apt-get -qq -y install wget && \
-apt-get -qq -y install bzip2
+RUN apt-get -qq -y install wget \
+&&  apt-get -qq -y install bzip2
 RUN apt-get update
 RUN sudo apt-get -qq -y install software-properties-common
 
 RUN sudo apt-get install -y python-pip python-dev build-essential \
 && pip install --upgrade pip \
-&& pip install jupyter
-&& pip install numpy scipy matplotlib seaborn
+&& pip install jupyter \
+&& pip install numpy scipy matplotlib seaborn \
 ENV PATH=/home/ubuntu/.local/bin:$PATH
 
 
@@ -31,7 +31,6 @@ RUN tar xvf spark-2.0.2-bin-hadoop2.7.tgz
 RUN rm spark-2.0.2-bin-hadoop2.7.tgz
 RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
-RUN sudo mkdir -p /external/spark-jupyter
 WORKDIR /external/spark-jupyter
 
 ENV PYSPARK_DRIVER_PYTHON="jupyter" 
