@@ -33,6 +33,7 @@ RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
 WORKDIR /external/spark-jupyter
 
+ENV PYSPARK_PYTHON=/usr/local/bin/python3.5
 ENV PYSPARK_DRIVER_PYTHON="jupyter" 
 ENV PYSPARK_DRIVER_PYTHON_OPTS="notebook" 
 
