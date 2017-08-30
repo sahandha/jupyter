@@ -4,8 +4,8 @@ MAINTAINER Sahand Hariri sahandha@gmail.com
 RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
 RUN apt-get -qq update
 RUN apt-get -qq -y install wget \
-&&  apt-get -qq -y install bzip2 \
-&& apt-get -qq -y instgall git
+&& apt-get -qq -y install bzip2 \
+&& apt-get -qq -y install git
 
 RUN apt-get update
 RUN sudo apt-get -qq -y install software-properties-common
