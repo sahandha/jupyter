@@ -31,7 +31,7 @@ RUN tar xvf spark-2.0.2-bin-hadoop2.7.tgz
 RUN rm spark-2.0.2-bin-hadoop2.7.tgz
 RUN mv spark-2.0.2-bin-hadoop2.7 /opt/spark
 
-WORKDIR /external/spark-jupyter
+WORKDIR /exports/isoforest
 
 ENV PYSPARK_PYTHON=pthon3
 ENV PYSPARK_DRIVER_PYTHON="jupyter" 
